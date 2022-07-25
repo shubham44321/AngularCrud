@@ -1,0 +1,69 @@
+<div class="container">
+
+  <mat-card>
+    <mat-toolbar color="accent">
+      <div align="center" style="color:white;text-align: right;">
+        CRUD operation in Angular 9 using Web api
+      </div>
+    </mat-toolbar>
+    <br><br>
+    <mat-card-content>
+      <form [formGroup]="employeeForm" (ngSubmit)="onFormSubmit()">
+        <table>
+          <tr>
+            <td class="tbl1">
+              <mat-form-field class="demo-full-width">
+                <input formControlName="Name" matTooltip="Enter Employee Name" matInput placeholder="Employee Name">
+              </mat-form-field>
+              <mat-error>
+                <span *ngIf="!employeeForm.get('Name').value && employeeForm.get('Name').touched"></span>
+              </mat-error>
+            </td>
+            <td class="tbl1">
+              <mat-form-field class="demo-full-width">
+                <input formControlName="Role" matTooltip="Enter Role" matInput placeholder="Role">
+              </mat-form-field>
+              <mat-error>
+                <span *ngIf="!employeeForm.get('Role').value && employeeForm.get('Role').touched"></span>
+              </mat-error>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="content-center">
+              <button type="submit" mat-raised-button color="accent" matTooltip="Click Submit Button" >Submit</button>
+              <button type="reset" mat-raised-button color="accent" matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>
+            </td>
+            <td>
+              <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">
+                {{message}}
+              </p>
+            </td>
+          </tr>
+        </table>
+        <br><br>
+        <table class="table">
+          <tr ngclass="btn-primary">
+            <th class="tbl4">Employee Id</th>
+            <th class="tbl4">Employee Name</th>
+            <th class="tbl4">Employee Role</th>
+            <th class="tbl4">Edit</th>
+            <th class="tbl4">Delete</th>
+          </tr>
+          <tr *ngFor="let employee of allEmployees | async">
+            <td class="tbl4">{{employee.Id}}</td>
+            <td class="tbl4">{{employee.Name }}</td>
+            <td class="tbl4">{{employee.Role}}</td>
+            <td class="tbl4">
+              <button type="button" class="btn btn-info" matTooltip="Click Edit Button" (click)="loadEmployeeToEdit(employee.Id)">Edit</button>
+            </td>
+            <td class="tbl4">
+              <button type="button" class="btn btn-danger" matTooltip="Click Delete Button" (click)="deleteEmployee(employee.Id)">Delete</button>
+            </td>
+          </tr>
+
+        </table>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div> 
